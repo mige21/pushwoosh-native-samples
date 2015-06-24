@@ -95,6 +95,17 @@ public class MainActivity extends FragmentActivity implements SendTagsCallBack
 		//Register for push!
 		pushManager.registerForPushNotifications();
 
+		//check launch notification (optional)
+		String launchNotificatin = pushManager.getLaunchNotification();
+		if (launchNotificatin != null)
+		{
+			Log.d("Pushwoosh", "Launch notification received: " + launchNotificatin);
+		}
+		else
+		{
+			Log.d("Pushwoosh", "No launch notification received");
+		}
+
 		//The commented code below shows how to use geo pushes
 		//pushManager.startTrackingGeoPushes();
 
