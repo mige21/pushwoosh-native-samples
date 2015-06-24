@@ -11,6 +11,6 @@
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) ViewController *viewController;
 
-+ (AppDelegate *) sharedDelegate;
++ (AppDelegate *)sharedDelegate;
 
 @end

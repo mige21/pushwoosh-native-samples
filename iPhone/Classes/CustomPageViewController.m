@@ -9,7 +9,7 @@
 @implementation CustomPageViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	self.view.backgroundColor = self.bgColor;
 	self.titleLabel.text = [NSString stringWithFormat:@"Only today get %ld%% discount!", (long)self.discount];
 }

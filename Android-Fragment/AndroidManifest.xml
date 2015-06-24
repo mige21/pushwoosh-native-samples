@@ -108,16 +108,5 @@
 
         <receiver android:name="com.arellomobile.android.push.AlarmReceiver" />
 
-        <service
-            android:enabled="true"
-            android:exported="true"
-            android:isolatedProcess="false"
-            android:label="iBeacon"
-            android:name="com.radiusnetworks.ibeacon.service.IBeaconService" />
-        <service
-            android:enabled="true"
-            android:name="com.radiusnetworks.ibeacon.IBeaconIntentProcessor" />
-        <service android:name="com.arellomobile.android.push.PushBeaconService" />
-
     </application>
 </manifest>

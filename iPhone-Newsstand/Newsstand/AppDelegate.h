@@ -9,7 +9,7 @@
 @class StoreViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, PushNotificationDelegate> {
-    UINavigationController *navController;
+	UINavigationController *navController;
 }
 
 @property (strong, nonatomic) UIWindow *window;
