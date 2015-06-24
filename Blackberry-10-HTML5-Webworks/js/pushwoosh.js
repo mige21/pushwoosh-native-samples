@@ -358,17 +358,20 @@ var utils = {
 		el = {
 			'clear': document.getElementById('clear'),
 			'content': document.getElementById('content'),
+			'log': document.getElementById('PWLog'),
 			'register': document.getElementById('register'),
 			'unregister': document.getElementById('unregister')
 		};
 		
 		console.log(value);
-		value = '<span style="color: #111111;">[' + new Date().toTimeString().split(' ')[0] + ']</span> ' + value.toString();
+		if (el.log) {
+			value = '<span style="color: #111111;">[' + new Date().toTimeString().split(' ')[0] + ']</span> ' + value.toString();
 
-		div = document.createElement('div');
-		div.innerHTML = value;
-		el.content.appendChild(div);
-		el.content.scrollTop = el.content.scrollHeight;
+			div = document.createElement('div');
+			div.innerHTML = value;
+			el.log.appendChild(div);
+			el.log.scrollTop = el.log.scrollHeight;
+		}
 	}
 };
 
