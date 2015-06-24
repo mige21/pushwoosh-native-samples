@@ -1,5 +1,7 @@
 /*
-* Copyright 2014 BlackBerry Limited.
+* Pushwoosh plugin for BlackBerry 10 HTML5
+* Copyright 2014 Pushwoosh Inc.
+* Based on BlackBerry Limited code.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -195,12 +197,25 @@ var pushwoosh = {
 		try {
 			/* Call the destroyChannel API to cease communication with Push services. */
 			utils.log('Destroying Push Channel.');
+
+			window.localStorage.lastActivity = 0;
+
+			pushwooshUtils.unregister(function(successMessage){
+				utils.log("Unregistered device");
+			}, function(jqXHR, errorMessage){
+				utils.log("Failed to unregistered device");
+			});
+
+			if(!pushwoosh.pushService) {
+				utils.log("No active push service");
+				return;
+			}
+
 			pushwoosh.pushService.destroyChannel(
 				function destroyChannelCallback(result) {
 					if (result === blackberry.push.PushService.SUCCESS) {
 						/* Channel was successfully destroyed, reset Push activity. */
 						utils.log('Successfully destroyed Push Channel.');
-						window.localStorage.lastActivity = 0;
 					} else {
 						/* Channel could not be destroyed. */
 						utils.log('Failed to destroy Push Channel: ' + result);
@@ -353,25 +368,7 @@ var pushwoosh = {
 var utils = {
 	/* Logs events to the screen and console. */
 	log: function (value) {
-		var div;
-
-		el = {
-			'clear': document.getElementById('clear'),
-			'content': document.getElementById('content'),
-			'log': document.getElementById('PWLog'),
-			'register': document.getElementById('register'),
-			'unregister': document.getElementById('unregister')
-		};
-		
 		console.log(value);
-		if (el.log) {
-			value = '<span style="color: #111111;">[' + new Date().toTimeString().split(' ')[0] + ']</span> ' + value.toString();
-
-			div = document.createElement('div');
-			div.innerHTML = value;
-			el.log.appendChild(div);
-			el.log.scrollTop = el.log.scrollHeight;
-		}
 	}
 };
 
