@@ -76,7 +76,13 @@ public class MainActivity extends FragmentActivity implements SendTagsCallBack
 			@Override
 			public void onRichPageAction(String actionParams)
 			{
-				Log.e("Pushwoosh", "Rich page action: " + actionParams);
+				Log.d("Pushwoosh", "Rich page action: " + actionParams);
+			}
+			
+			@Override
+			public void onRichPageClosed()
+			{
+				Log.d("Pushwoosh", "Rich page closed");
 			}
 		}
 
