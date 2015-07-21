@@ -111,6 +111,9 @@ public class MainActivity extends FragmentActivity implements SendTagsCallBack
 		{
 			Log.d("Pushwoosh", "No launch notification received");
 		}
+		
+		// send local notification
+		PushManager.scheduleLocalNotification(getApplicationContext(), "PushwooshSample started", 5);
 
 		//The commented code below shows how to use geo pushes
 		//pushManager.startTrackingGeoPushes();
