@@ -18,8 +18,8 @@ typedef NS_ENUM(NSInteger, PWSupportedOrientations) {
 	PWOrientationLandscapeRight = 1 << 3,
 };
 
-typedef void(^pushwooshGetTagsHandler)(NSDictionary *tags);
-typedef void(^pushwooshErrorHandler)(NSError *error);
+typedef void(^PushwooshGetTagsHandler)(NSDictionary *tags);
+typedef void(^PushwooshErrorHandler)(NSError *error);
 
 /**
  `PushNotificationDelegate` protocol defines the methods that can be implemented in the delegate of the `PushNotificationManager` class' singleton object.
@@ -103,6 +103,11 @@ typedef void(^pushwooshErrorHandler)(NSError *error);
 - (void) onRichPageButtonTapped:(NSString *)customData;
 
 /**
+ User has tapped on the back button on Rich Push Page.
+ */
+- (void) onRichPageBackTapped;
+
+/**
  Tells the delegate that the push manager has received tags from the server.
  
  @param tags Dictionary representation of received tags.
@@ -159,7 +164,6 @@ typedef void(^pushwooshErrorHandler)(NSError *error);
 	NSString *appCode;
 	NSString *appName;
 
-	UIWindow *richPushWindow;
 	NSObject<PushNotificationDelegate> *__unsafe_unretained delegate;
 }
 
@@ -197,9 +201,6 @@ typedef void(^pushwooshErrorHandler)(NSError *error);
  */
 @property (nonatomic, assign) NSObject<PushNotificationDelegate> *delegate;
 
-@property (nonatomic, retain) UIWindow *richPushWindow;
-@property (nonatomic, assign) PWSupportedOrientations supportedOrientations;
-
 /**
  Show push notifications alert when push notification is received while the app is running, default is `YES`
  */
@@ -235,11 +236,8 @@ typedef void(^pushwooshErrorHandler)(NSError *error);
  */
 - (void) unregisterForPushNotifications;
 
-+ (BOOL) getAPSProductionStatus:(BOOL)canShowAlert;
-
 - (id) initWithApplicationCode:(NSString *)appCode appName:(NSString *)appName;
 - (id) initWithApplicationCode:(NSString *)appCode navController:(UIViewController *) navController appName:(NSString *)appName __attribute__((deprecated));
-- (void) showWebView;
 
 /**
  Start location tracking.
@@ -280,6 +278,11 @@ typedef void(^pushwooshErrorHandler)(NSError *error);
 - (void) setTags: (NSDictionary *) tags;
 
 /**
+ Send tags to server with completion block. If setTags succeeds competion is called with nil argument. If setTags fails completion is called with error.
+ */
+- (void) setTags: (NSDictionary *) tags withCompletion: (void(^)(NSError* error)) completion;
+
+/**
  Get tags from the server. Calls delegate method `onTagsReceived:` or `onTagsFailedToReceive:` depending on the results.
  */
 - (void) loadTags;
@@ -297,7 +300,7 @@ typedef void(^pushwooshErrorHandler)(NSError *error);
  
  @param errorHandler The block is executed on the unsuccessful completion of the request. This block has no return value and takes one argument: the error that occurred during the request.
  */
-- (void) loadTags: (pushwooshGetTagsHandler) successHandler error:(pushwooshErrorHandler) errorHandler;
+- (void) loadTags: (PushwooshGetTagsHandler) successHandler error:(PushwooshErrorHandler) errorHandler;
 
 /**
  Informs the Pushwoosh about the app being launched. Usually called internally by SDK Runtime.
@@ -447,15 +450,5 @@ typedef void(^pushwooshErrorHandler)(NSError *error);
  Clears the notifications from the notification center.
  */
 + (void) clearNotificationCenter;
-
-/**
- Internal function
- */
-- (NSDictionary *) getPage:(NSString *)pageId;
-
-/**
- Internal function
- */
-- (void) onRichPageButtonTapped:(NSString *)customData;
 
 @end
