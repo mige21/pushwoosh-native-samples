@@ -3,6 +3,10 @@ package com.senneco.BigNotify;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.pushwoosh.PushManager;
+import com.pushwoosh.BasePushMessageReceiver;
+import com.pushwoosh.BaseRegistrationReceiver;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,11 +17,6 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.arellomobile.android.push.BasePushMessageReceiver;
-import com.arellomobile.android.push.PushManager;
-import com.arellomobile.android.push.utils.RegisterBroadcastReceiver;
-import com.pushwoosh.support.v4.app.LocalBroadcastManager;
 
 public class MyActivity extends Activity
 {
@@ -123,7 +122,7 @@ public class MyActivity extends Activity
 	}
 
 	//Registration receiver
-	BroadcastReceiver mBroadcastReceiver = new RegisterBroadcastReceiver()
+	BroadcastReceiver mBroadcastReceiver = new BaseRegistrationReceiver()
 	{
 		@Override
 		public void onRegisterActionReceive(Context context, Intent intent)

@@ -1,7 +1,7 @@
 package com.pushwoosh.test.tags.sample.app;
 
-import com.arellomobile.android.push.fragment.PushEventListener;
-import com.arellomobile.android.push.fragment.PushFragment;
+import com.pushwoosh.fragment.PushEventListener;
+import com.pushwoosh.fragment.PushFragment;
 
 import android.content.Intent;
 import android.os.Bundle;

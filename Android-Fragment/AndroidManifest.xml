@@ -69,44 +69,49 @@
 
         </activity>
 
-        <activity android:name="com.arellomobile.android.push.PushWebview" />
+        <activity android:name="com.pushwoosh.richpages.RichPageActivity" />
 
-        <activity android:name="com.arellomobile.android.push.MessageActivity" />
+        <activity android:name="com.pushwoosh.MessageActivity" />
 
-        <activity android:name="com.arellomobile.android.push.PushHandlerActivity" />
+        <activity android:name="com.pushwoosh.PushHandlerActivity" />
 
-
-        <!--
-          BroadcastReceiver that will receive intents from GCM
-          services and handle them to the custom IntentService.
-
-          The com.google.android.c2dm.permission.SEND permission is necessary
-          so only GCM services can send data messages for the app.
-        -->
         <receiver
-            android:name="com.google.android.gcm.GCMBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:name="com.pushwoosh.thirdparty.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
-                <!-- Receives the actual messages. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <!-- Receives the registration id. -->
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
                 <category android:name="com.pushwoosh.test.tags.sample.app" />
             </intent-filter>
         </receiver>
-
-        <!--
-          Application-specific subclass of PushGCMIntentService that will
-          handle received messages.
-        -->
-        <service android:name="com.arellomobile.android.push.PushGCMIntentService" />
+		
+		<service
+		    android:name="com.pushwoosh.GCMListenerService"
+		    android:exported="false">
+		    <intent-filter>
+		        <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+		    </intent-filter>
+		</service>
+		
+		<service
+		    android:name="com.pushwoosh.GCMInstanceIDListenerService"
+		    android:exported="false">
+		    <intent-filter>
+		        <action android:name="com.google.android.gms.iid.InstanceID"/>
+		    </intent-filter>
+		</service>
+		
+		<service
+		    android:name="com.pushwoosh.GCMRegistrationService"
+		    android:exported="false">
+		</service>
 
         <!--
           Service for sending location updates
         -->
-        <service android:name="com.arellomobile.android.push.GeoLocationService" />
+        <service android:name="com.pushwoosh.location.GeoLocationService" />
 
-        <receiver android:name="com.arellomobile.android.push.AlarmReceiver" />
+        <receiver android:name="com.pushwoosh.local.AlarmReceiver" />
 
     </application>
 </manifest>

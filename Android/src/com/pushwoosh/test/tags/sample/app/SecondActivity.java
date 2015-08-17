@@ -1,10 +1,10 @@
 package com.pushwoosh.test.tags.sample.app;
 
+import com.pushwoosh.PushManager;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import com.arellomobile.android.push.PushManager;
 
 /**
  * Date: 04.09.13

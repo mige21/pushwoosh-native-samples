@@ -16,14 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.arellomobile.android.push.BasePushMessageReceiver;
-import com.arellomobile.android.push.PushManager;
-import com.arellomobile.android.push.PushManager.GetTagsListener;
-import com.arellomobile.android.push.PushManager.RichPageListener;
-import com.arellomobile.android.push.utils.RegisterBroadcastReceiver;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.pushwoosh.PushManager;
+import com.pushwoosh.PushManager.GetTagsListener;
+import com.pushwoosh.PushManager.RichPageListener;
+import com.pushwoosh.BasePushMessageReceiver;
+import com.pushwoosh.BaseRegistrationReceiver;
 
 public class MainActivity extends FragmentActivity implements SendTagsCallBack
 {
@@ -184,7 +184,7 @@ public class MainActivity extends FragmentActivity implements SendTagsCallBack
 	}
 
 	//Registration receiver
-	BroadcastReceiver mBroadcastReceiver = new RegisterBroadcastReceiver()
+	BroadcastReceiver mBroadcastReceiver = new BaseRegistrationReceiver()
 	{
 		@Override
 		public void onRegisterActionReceive(Context context, Intent intent)

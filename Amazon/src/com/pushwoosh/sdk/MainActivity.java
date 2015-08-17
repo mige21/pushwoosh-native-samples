@@ -4,7 +4,12 @@
  * (c) 2012, Amazon.com, Inc. or its affiliates. All Rights Reserved.
  */
 
-package com.arellomobile.sample.admmessenger;
+package com.pushwoosh.sdk;
+
+import com.pushwoosh.sdk.R;
+import com.pushwoosh.PushManager;
+import com.pushwoosh.BasePushMessageReceiver;
+import com.pushwoosh.BaseRegistrationReceiver;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -13,10 +18,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import com.arellomobile.android.push.BasePushMessageReceiver;
-import com.arellomobile.android.push.PushManager;
-import com.arellomobile.android.push.utils.RegisterBroadcastReceiver;
 
 /**
  * Main activity of the sample app.
@@ -28,9 +29,6 @@ public class MainActivity extends Activity
 {
     /** Tag for logs. */
     private final static String TAG = "ADMMessenger";
-
-    /** Catches intents sent from the onMessage() callback to update the UI. */
-    private BroadcastReceiver msgReceiver;
 
     /** {@inheritDoc} */
     @Override
@@ -81,7 +79,7 @@ public class MainActivity extends Activity
 	}
 
 	//Registration receiver
-	BroadcastReceiver mBroadcastReceiver = new RegisterBroadcastReceiver()
+	BroadcastReceiver mBroadcastReceiver = new BaseRegistrationReceiver()
 	{
 		@Override
 		public void onRegisterActionReceive(Context context, Intent intent)

@@ -5,7 +5,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:amazon="http://schemas.amazon.com/apk/res/android"
-    package="com.arellomobile.sample.admmessenger"
+    package="com.pushwoosh.sdk"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -17,11 +17,11 @@
     should have the form packagename.permission.RECIEVE_ADM_MESSAGE where packagename is the
     name defined in the "package" property of the manifest tag. -->
     <permission
-        android:name="com.arellomobile.sample.admmessenger.permission.RECEIVE_ADM_MESSAGE"
+        android:name="com.pushwoosh.sdk.permission.RECEIVE_ADM_MESSAGE"
         android:protectionLevel="signature" />
 
     <!-- Required permissions -->
-    <uses-permission android:name="com.arellomobile.sample.admmessenger.permission.RECEIVE_ADM_MESSAGE" />
+    <uses-permission android:name="com.pushwoosh.sdk.permission.RECEIVE_ADM_MESSAGE" />
     <uses-permission android:name="com.amazon.device.messaging.permission.RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -34,7 +34,7 @@
         <meta-data android:name="PW_APPID" android:value="539E9-AB8AE" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.pushwoosh.sdk.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_main">
             <intent-filter>
@@ -43,21 +43,21 @@
             </intent-filter>
 
             <intent-filter>
-                <action android:name="com.arellomobile.sample.admmessenger.MESSAGE"/>
+                <action android:name="com.pushwoosh.sdk.MESSAGE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
 
         </activity>
 
-        <activity android:name="com.arellomobile.android.push.PushWebview"/>
+        <activity android:name="com.pushwoosh.richpages.RichPageActivity"/>
 
-        <activity android:name="com.arellomobile.android.push.MessageActivity"/>
+        <activity android:name="com.pushwoosh.MessageActivity"/>
 
-        <activity android:name="com.arellomobile.android.push.PushHandlerActivity"/>
+        <activity android:name="com.pushwoosh.PushHandlerActivity"/>
 
         <!--  Application-specific subclass of ADMMessageHandlerBase that will
           handle received messages -->
-        <service android:name="com.arellomobile.android.push.PushAmazonIntentService" />
+        <service android:name="com.pushwoosh.PushAmazonIntentService" />
 
         <!-- You must explicitly enable ADM. You must also declare whether your application will run with or without ADM.
         If you specify android:required="false", your app must degrade gracefully when ADM is unavailable. -->
@@ -66,13 +66,13 @@
             android:required="false" />
 
         <receiver
-            android:name="com.arellomobile.android.push.MessageAlertReceiver"
+            android:name="com.pushwoosh.MessageAlertReceiver"
             android:permission="com.amazon.device.messaging.permission.SEND">
             <intent-filter>
                 <action android:name="com.amazon.device.messaging.intent.REGISTRATION" />
                 <action android:name="com.amazon.device.messaging.intent.RECEIVE" />
 
-                <category android:name="com.arellomobile.sample.admmessenger" />
+                <category android:name="com.pushwoosh.sdk" />
             </intent-filter>
         </receiver>
     </application>
