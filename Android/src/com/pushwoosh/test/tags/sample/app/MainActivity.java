@@ -87,6 +87,8 @@ public class MainActivity extends FragmentActivity implements SendTagsCallBack
 		}
 
 		pushManager.setRichPageListener(new RichPageListenerImpl());
+		
+		//pushManager.setNotificationFactory(new NotificationFactorySample());
 
 		//Start push manager, this will count app open for Pushwoosh stats as well
 		try
@@ -95,7 +97,7 @@ public class MainActivity extends FragmentActivity implements SendTagsCallBack
 		}
 		catch (Exception e)
 		{
-			//push notifications are not available or AndroidManifest.xml is not configured properly
+			Log.e("Pushwoosh", e.getLocalizedMessage());
 		}
 
 		//Register for push!
@@ -170,6 +172,9 @@ public class MainActivity extends FragmentActivity implements SendTagsCallBack
 				pushManager.stopTrackingGeoPushes();
 			}
 		});
+		
+		//Clear application badge number
+		//pushManager.setBadgeNumber(0);
 	}
 
 	/**
